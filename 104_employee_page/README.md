@@ -1,6 +1,6 @@
 # Employee page
 
-Build a employee page to show and edit the employee info. One inspirations is [Polywork](https://www.polywork.com/).
+Build a employee page to show and edit the employee info. One inspirations is [linkedin](https://www.linkedin.com/in/yann-lecun/).
 
 # Instructions
 
