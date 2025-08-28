@@ -8,11 +8,14 @@ export default function Home() {
   const [name, setName] = useState("");
 
   const handleSubmit = async () => {
+    try {
     await fetch("/api/user/update", {
-      method: "POST",
-      body: JSON.stringify({ id: Number(id), name }),
-    });
-    alert("更新成功！");
+        method: "POST",
+        body: JSON.stringify({ id: Number(id), name }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -34,11 +37,14 @@ export default function Home() {
         更新
       </button>
       <Profile />
-      <Card header={<h2>工作经历</h2>} children={<h1>智谱AI</h1>} footer={<h1>显示更多</h1>}>
+      <Card header={<h2>工作经历</h2>} footer={<h1>显示更多</h1>}>
+        <h1>智谱AI</h1>
       </Card>
-      <Card header={<h2>教育经历</h2>} children={<h1>QiLu University</h1>} footer={<h1>显示更多</h1>}>
+      <Card header={<h2>教育经历</h2>} footer={<h1>显示更多</h1>}>
+        <h1>QiLu University</h1>
       </Card>
-      <Card header={<h2>技能</h2>} children={<h1>JavaScript</h1>} footer={<h1>显示更多</h1>}>
+      <Card header={<h2>技能</h2>} footer={<h1>显示更多</h1>}>
+        <h1>JavaScript</h1>
       </Card>
     </div>
   );

@@ -10,7 +10,7 @@ export async function POST(req: Request) {
       data: { name },
     });
     return Response.json(user);
-  } catch (err) {
+  } catch {
     return new Response("Error updating user", { status: 500 });
   }
 } 
