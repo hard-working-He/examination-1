@@ -1,16 +1,33 @@
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
-  const body = await req.json();
-  const { id, name } = body;
-
   try {
+    const body = await req.json();
+    const { id, name } = body;
+
+    // 验证输入
+    if (!id || !name) {
+      return new Response("Missing id or name", { status: 400 });
+    }
+
+    // 检查用户是否存在
+    const existingUser = await prisma.user.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (!existingUser) {
+      return new Response(`User with id ${id} not found`, { status: 404 });
+    }
+
+    // 更新用户
     const user = await prisma.user.update({
-      where: { id },
+      where: { id: Number(id) },
       data: { name },
     });
+
     return Response.json(user);
-  } catch {
-    return new Response("Error updating user", { status: 500 });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return new Response(`Error updating user: ${error instanceof Error ? error.message : 'Unknown error'}`, { status: 500 });
   }
 } 
